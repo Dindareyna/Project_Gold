@@ -4,7 +4,7 @@ from flasgger import Swagger, LazyString, LazyJSONEncoder, swag_from
 from nltk.tokenize import WordPunctTokenizer
 import pandas as pd
 import re
-
+import sqlite3 as sq
 
 app=Flask(__name__)
 app.json_encoder = LazyJSONEncoder
@@ -44,6 +44,15 @@ def remove_emoticon(text):
 def remove_emoticon2(text):
     return re.sub(r"\\x[A-Za-z0-9./]+", " ", text)
 
+def remove_ascii(text):
+    text = text.encode().decode('unidecode_escape')
+    text = bytes(text,'latin').decode('utf-8')
+    return text
+
+def remove_ascii2(text):
+    text = re.sub(r"\\x[A-Za-z0-9./]+"," ",unidecode(text))
+    return text
+    
 def remove_backslashn(text):
     return re.sub(r"\\n+", "  ", text)
 
@@ -70,8 +79,9 @@ def cleansing_text():
     non_punct = remove_punctuation(no_slashn)
     no_hashtag = remove_hastag(non_punct)
     hasil = {
-        "result" : no_hashtag
+       "result" : no_hashtag
     }
+    
     return jsonify(hasil)
 
 
@@ -79,15 +89,16 @@ def cleansing_text():
 @app.route("/project_gold_file", methods = ['POST']) 
 def post_file():
     file = request.files["file"]
-    df = pd.read_csv(file, encoding ="latin-1")
+    df = pd.read_csv(file, encoding ="latin1")
     df = pd.DataFrame(df['Tweet'])
     df['new_Tweet'] = df['Tweet'].str.lower()
-    df['new_Tweet'] = df['Tweet'].apply(remove_emoticon)
-    df['new_Tweet'] = df['Tweet'].apply(remove_emoticon2)
-    df['new_Tweet'] = df['Tweet'].apply(remove_backslashn)
-    df['new_Tweet'] = df['Tweet'].apply(remove_punctuation)
-    df['new_Tweet'] = df['Tweet'].apply(remove_hastag)
-
+    df['new_Tweet'] = df['new_Tweet'].replace('user','',regex=True)
+    df['new_Tweet'] = df['new_Tweet'].apply(remove_emoticon)
+    df['new_Tweet'] = df['new_Tweet'].apply(remove_emoticon2)
+    df['new_Tweet'] = df['new_Tweet'].apply(remove_backslashn)
+    df['new_Tweet'] = df['new_Tweet'].apply(remove_punctuation)
+    df['new_Tweet'] = df['new_Tweet'].apply(remove_hastag)
+    
     return jsonify({"result: ":"succesfully uploaded to db"})
 
 if __name__ == "__main__":
