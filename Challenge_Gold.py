@@ -5,6 +5,7 @@ from nltk.tokenize import WordPunctTokenizer
 import pandas as pd
 import re
 import sqlite3 as sq
+import time
 
 app=Flask(__name__)
 app.json_encoder = LazyJSONEncoder
@@ -44,10 +45,8 @@ def remove_emoticon(text):
 def remove_emoticon2(text):
     return re.sub(r"\\x[A-Za-z0-9./]+", " ", text)
 
-def remove_ascii(text):
-    text = text.encode().decode('unidecode_escape')
-    text = bytes(text,'latin').decode('utf-8')
-    return text
+def remove_space(text):
+    return re.sub(' +',' ',text)
 
 def remove_ascii2(text):
     text = re.sub(r"\\x[A-Za-z0-9./]+"," ",unidecode(text))
@@ -75,7 +74,8 @@ def cleansing_text():
     text = request.get_json()
     no_emoticon = remove_emoticon(text['text'])
     no_emoticon2 = remove_emoticon2(no_emoticon)
-    no_slashn = remove_backslashn(no_emoticon2)
+    no_space = remove_space(no_emoticon2)
+    no_slashn = remove_backslashn(no_space)
     non_punct = remove_punctuation(no_slashn)
     no_hashtag = remove_hastag(non_punct)
     hasil = {
@@ -89,17 +89,35 @@ def cleansing_text():
 @app.route("/project_gold_file", methods = ['POST']) 
 def post_file():
     file = request.files["file"]
+    start = time.time()
     df = pd.read_csv(file, encoding ="latin1")
-    df = pd.DataFrame(df['Tweet'])
     df['new_Tweet'] = df['Tweet'].str.lower()
     df['new_Tweet'] = df['new_Tweet'].replace('user','',regex=True)
     df['new_Tweet'] = df['new_Tweet'].apply(remove_emoticon)
     df['new_Tweet'] = df['new_Tweet'].apply(remove_emoticon2)
+    df['new_Tweet'] = df['new_Tweet'].apply(remove_space)
     df['new_Tweet'] = df['new_Tweet'].apply(remove_backslashn)
     df['new_Tweet'] = df['new_Tweet'].apply(remove_punctuation)
     df['new_Tweet'] = df['new_Tweet'].apply(remove_hastag)
+    print(df.head(6))
     
-    return jsonify({"result: ":"succesfully uploaded to db"})
+    #import to database
+    data = df
+    sql_data = 'DATA_TWEET'
+    conn = sq.connect(sql_data)
+    mycur = conn.cursor
+    
+    data.to_sql('DATA_TWEET',conn, if_exists='replace', index=False)
+    conn.commit()
+    conn.close()
+    end = time.time()
+
+    hasil = {
+       "result" : "succesfully uploaded to db",
+       "time execution" : start - end
+    }
+    
+    return jsonify(hasil)
 
 if __name__ == "__main__":
         app.run(port=1255, debug = True)
