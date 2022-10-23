@@ -105,11 +105,11 @@ def post_file():
     
     #import to database
     data = df
-    sql_data = 'DATA_TWEET'
+    sql_data = 'DATA_TWEET.db'
     conn = sq.connect(sql_data)
-    mycur = conn.cursor
+    mycur = conn.cursor()
     
-    data.to_sql('DATA_TWEET',conn, if_exists='replace', index=False)
+    data.to_sql('data_tweet',conn, if_exists='replace', index=False)
     conn.commit()
     conn.close()
     end = time.time()
