@@ -47,11 +47,7 @@ def remove_emoticon2(text):
 
 def remove_space(text):
     return re.sub(' +',' ',text)
-
-def remove_ascii2(text):
-    text = re.sub(r"\\x[A-Za-z0-9./]+"," ",unidecode(text))
-    return text
-    
+       
 def remove_backslashn(text):
     return re.sub(r"\\n+", "  ", text)
 
@@ -82,6 +78,12 @@ def cleansing_text():
        "result" : no_hashtag
     }
     
+    #import to db
+    conn = sq.connect("data_tweet1.db")  
+    conn.execute("insert into tweet (Dirty_text,Clean_text) values (?,?)", (text['text'],no_hashtag)) 
+    conn.commit()
+    conn.close()
+
     return jsonify(hasil)
 
 
@@ -114,7 +116,7 @@ def post_file():
 
     hasil = {
        "result" : "succesfully uploaded to db",
-       "time execution" : start - end
+       "time execution" : end - start
     }
     
     return jsonify(hasil)
