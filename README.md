@@ -32,28 +32,28 @@
 
 # Hasil 
 
-![visualisasi](images/vi1.PNG)
+![visualisasi](vi1.PNG)
 - Dari visualisasi di atas, dapat diketahui bahwa sebesar 42.3% dari keseluruhan dataset merupakan Hate Speech.
 
-![visualisasi](images/vi9.PNG)
+![visualisasi](vi9.PNG)
 - Dari visualisasi di atas, dapat diketahui bahwa sebesar 38.4% dari keseluruhan dataset merupakan Abusive Languange.
 
-![visualisasi](images/vi3.PNG)
+![visualisasi](vi3.PNG)
 - Berdasarkan visualisasi di atas, dapat diketahui bahwa tipe Hate Speech yang ditargetkan kepada individu lebih besar totalnya daripada Hate Speech target group yakni sebesar 3540 dari keseluruhan dataset.
 
-![visualisasi](images/vi4.PNG)
+![visualisasi](vi4.PNG)
 - Pada visualisasi Hate Speech dengan tipe kategori, diketahui bahwa kategori yang memiliki total terbanyak adalah Tipe Other. Dimana hal ini berarti bahwa Hate Speech tersebut ditujukan kepada suatu objek selain 4 kategori lain.
 
-![visualisasi](images/vi5.PNG)
+![visualisasi](vi5.PNG)
 - Sedangkan pada kasus Hate Speech Level, Hate Speech terjadi paling banyak dalam level lemah dengan total sebesar 3348 dari keseluruhan dataset.
 
-![visualisasi](images/vi6.PNG)
+![visualisasi](vi6.PNG)
 - Visualisasi di atas menunjukkan bahwa dari seluruh dataset, nama "jokowi" lebih banyak muncul dengan total 1069 dibanding dengan nama "prabowo".
 
-![visualisasi](images/vi7.PNG)
+![visualisasi](vi7.PNG)
 - Berdasarkan visualisasi di atas, diketahui bahwa persentase tweet yang mengandung Hate Speech sebesar 3.6%, dimana Hate Speech dengan level strong ini memiliki kemungkinan yang besar untuk menimbulkan kekacauan.
 
-![visualisasi](images/vi2.PNG)
+![visualisasi](vi2.PNG)
 - Visualisasi di atas menjelaskan bahwa kasus Hate Speech memiliki total lebih tinggi daripada kelas Abusive yang dengan total sebanyak 5518 dari 13044 data.
 
 
