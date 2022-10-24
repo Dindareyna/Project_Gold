@@ -39,7 +39,7 @@
 - Dari visualisasi di atas, dapat diketahui bahwa sebesar 38.4% dari keseluruhan dataset merupakan Abusive Languange.
 
 ![visualisasi](images/vi3.PNG)
-- Berdasarkan visualisasi di atas, dapat diketahui bahwa tipe Hate Speech yang ditargetkan kepada individu lebih besar totalnya daripada Hate Speech target group yakni sebesar 3521 dari keseluruhan dataset.
+- Berdasarkan visualisasi di atas, dapat diketahui bahwa tipe Hate Speech yang ditargetkan kepada individu lebih besar totalnya daripada Hate Speech target group yakni sebesar 3540 dari keseluruhan dataset.
 
 ![visualisasi](images/vi4.PNG)
 - Pada visualisasi Hate Speech dengan tipe kategori, diketahui bahwa kategori yang memiliki total terbanyak adalah Tipe Other. Dimana hal ini berarti bahwa Hate Speech tersebut ditujukan kepada suatu objek selain 4 kategori lain.
