@@ -13,7 +13,7 @@
  - API yang sudah dibuat memiliki alamat url http://127.0.0.1:1255
 
 # Tentang Data
- - Data diambil dari penelitian Ibrohim and Budi (2018) pada Kaggle 
+ - Data diambil dari penelitian Ibrohim and Budi (2018) pada Kaggle. link data: https://www.kaggle.com/datasets/c7af46bd64825107fff61076eeec0df32f905f0e9b7f43b7c361b53b5f404312?resource=download&select=data.csv 
     - Informasi label dari dataset dapat dilihat pada dibawah ini:
     - HS : label hate speech;
     - Abusive : label abusive language ;
